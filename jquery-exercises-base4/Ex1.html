@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jquery-exercice-base4</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <form action="">
+            <select name="" id="shifumiChoice">
+                <option value="0">Choisis une arme</option>
+                <option value="pierre">Pierre</option>
+                <option value="feuille">Feuille</option>
+                <option value="ciseaux">Ciseaux</option>
+            </select>
+        </form>
+        <button id="shifumi">Shifumi !</button>
+        <p id="info">
+            <br>
+            <span id="shifumiResult"></span>
+            <br>
+            <span id="victories"></span>
+            <br>
+            <span id="defeats"></span>
+            <span id="pourc"></span>
+        </p>
+    </div>
+</body>
+<script src="jquery-2.2.4.js"></script>
+<script>
+    let displayResult = $("#shifumiResult");
+    let displayVictories = $("#victories");
+    let displayDefeats = $("#defeats");
+    let displayPourc = $("#pourc");
+    let egaliteCount = 0;
+    let victoryCount = 0;
+    let defeatCount = 0;
+    let victoryBool;
+    let uxMsg = '';
+
+    // let displayResultFunc;
+    // displayResultFunc = () => {
+    //     if (victoryBool) {
+    //         console.log("VICTOIRE");
+    //         displayResult.html('Victoire');
+    //     } elseif (!victoryBool)
+    //     console.log("DEFEAT");
+    //     displayResult.html('Défaite');
+    //     $("#info").html(uxMsg);
+    // }
+    //Boutton de lancement
+    $("#shifumi").click(function () {
+        let selectedWeaponValue = $("#shifumiChoice").val();
+        if (selectedWeaponValue == 0) {
+            uxMsg = "Vous devez d'abord choisir une arme !";
+        } else {
+            let selectedWeapon = ($("#shifumiChoice option:selected").text()).toLowerCase();
+            let shifumiWeaponsArray = ['pierre', 'feuille', 'ciseaux'];
+            randomWeapon = shifumiWeaponsArray[Math.floor(Math.random() * 3)];
+            console.log("Arme sélectionnée : " + selectedWeapon);
+            console.log("Arme générée : " + randomWeapon);
+            if (selectedWeapon === randomWeapon) {
+                console.log("Egalité");
+                egaliteCount++;
+            } else if (selectedWeapon === 'pierre') {
+                switch (randomWeapon) {
+                    case 'ciseaux':
+                        victoryBool = true;
+                        victoryCount++;
+                        uxMsg = 'La pierre casse les ciseaux.';
+                        break;
+                    case 'feuille':
+                        victoryBool = false;
+                        defeatCount++;
+                        uxMsg = 'La pierre se fait emballer par la feuille.';
+                        break;
+                }
+
+            } else if (selectedWeapon === 'feuille') {
+                switch (randomWeapon) {
+                    case 'ciseaux':
+                        victoryBool = false;
+                        defeatCount++;
+                        uxMsg = 'La feuille de fait couper par les ciseaux.';
+                        break;
+                    case 'pierre':
+                        victoryBool = true;
+                        victoryCount++;
+                        uxMsg = 'La feuille emballe la pierre.';
+                        break;
+                }
+            } else if (selectedWeapon === 'ciseaux') {
+                switch (randomWeapon) {
+                    case 'feuille':
+                        victoryBool = true;
+                        victoryCount++;
+                        uxMsg = 'Les ciseaux coupent la feuille.';
+                        break;
+                    case 'pierre':
+                        victoryBool = false;
+                        defeatCount++;
+                        uxMsg = 'Les ciseaux se cassent contre la pierre.';
+                        break;
+                }
+            }
+        }
+        if (victoryBool) {
+            console.log("VICTOIRE");
+            displayResult.html('Victoire');
+        } elseif (!victoryBool)
+        console.log("DEFEAT");
+        displayResult.html('Défaite');
+        $("#displayDefeats").html(`Nombre de de défaites : ${defeatCount}`);
+        $("#displayVictories").html(`Nombre de de victoires : ${victoryCount}`);
+        $("#info").html(uxMsg);
+    });
+</script>
+</body>
+
+</html>

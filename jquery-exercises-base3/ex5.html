@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jquery-exercice-base3</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+        }
+
+        .carre {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            width: 300px;
+            background-color: orange;
+        }
+
+        input[text] {}
+    </style>
+</head>
+
+<body>
+    <div class="carre">
+        <form action="">
+            <input type="text">
+        </form>
+    </div>
+</body>
+<script src="jquery-2.2.4.js"></script>
+<script>
+    let carre = $(".carre");
+    let input = $("input");
+    carre.offset({
+        top: 0,
+        left: 0
+    });
+    input.keypress(function (key) {
+        //offset renvoie un objet {top: x, left: y}
+        position = carre.offset();
+        leftCoord = position.left;
+        rightCoord = position.top;
+        switch (key.keyCode) {
+            case 37: //fleche gauche
+                console.log("gauche");
+                position.left = position.left - 10;
+                carre.offset({
+                    top: position.top,
+                    left: position.left
+                });
+                break;
+            case 38: //fleche haut
+                console.log("haut");
+                position.top = position.top - 10;
+                carre.offset({
+                    top: position.top,
+                    left: position.left
+                });
+                break;
+            case 39: //fleche droite
+                console.log("right");
+                position.left = position.left + 10;
+                carre.offset({
+                    top: position.top,
+                    left: position.left
+                });
+                break;
+            case 40: //fleche bas
+                console.log("bas");
+                position.top = position.top + 10;
+                carre.offset({
+                    top: position.top,
+                    left: position.left
+                });
+                break;
+        }
+    });
+</script>
+</body>
+
+</html>

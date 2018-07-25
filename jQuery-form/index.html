@@ -1,0 +1,64 @@
+<!DOCTYPEhtml>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jquery-exercice-base4</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+</head>
+
+<body>
+    <main>
+        <h1>jQuery drill - Formulaire interactif</h1>
+        <h2>Créer un formulaire interactif animé grâce à jQuery</h2>
+        <p>
+            <pre>
+                L'objectif est de réaliser un formulaire interactif que l'on animera grâce à jQuery. Ce sera un formulaire est très basique, avec quelques champs qui verront leur style CSS changer suivant l'action de l'utilisateur. L'objectif est de vérifier les informations entrées : nombre de caractères, vérifier que la confirmation du mot de passe est identique à celui-ci, vérifier si tous les champs sont remplis, etc...
+            </pre>
+        </p>
+        <div id="container">
+            <form action="">
+                <label for="pseudo">Pseudo :</label>
+                <input type="text" name="nom" id="nom" placeholder="Entrez votre nom" required>
+                <label for="password">Password :</label>
+                <input type="password" name="password" id="password" placeholder="Entrez votre password" required>
+                <label for="passwordVerify">Password verification :</label>
+                <input type="password" name="passwordVerify" id="passwordVerify" placeholder="Veuillez vérifier" required>
+                <label for="email">Email :</label>
+                <input type="text" name="email" id="email" placeholder="Entrez votre email" required>
+            </form>
+            <button id="envoyerButton">Envoyer</button>
+            <p id="result">
+
+            </p>
+        </div>
+    </main>
+</body>
+<script src="jquery-2.2.4.js"></script>
+<script>
+    $("#envoyerButton").click(function () {
+                let nom, password, email, tel, resultDisplayEl, inputs;
+                resultDisplayEl = $("#result");
+                nom = $("#nom").val();
+                password = $("#password").val();
+                passwordVerify = $("#password").val();
+                email = $("#email").val();
+                tel = $("#tel").val();
+                //Ajouter le point() 
+                let pseudoRegex = /^[a-z.âäàéèùêëîïôöçñA-Z0-9\-\s]+$/i;
+                //Le regex du mail a été Gertrudé... via http://www.phpcodify.com/jquery-email-validation-using-regex-expression/
+                let emailRegex = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
+
+                //Verifier que tout est rempli
+                //Si un n'est pas rempli lui appliquer une classe .pasrempli
+                //Quand on est focus sur le champs password secondaire
+                //Verifier à chaque keypress la correspondance avec le champs password principal
+                //Si le caractère correspondant n'est pas identique
+                //afficher un message
+    });
+</script>
+</body>
+
+</html>

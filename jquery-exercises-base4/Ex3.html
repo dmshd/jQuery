@@ -1,0 +1,81 @@
+<!DOCTYPEhtml>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jquery-exercice-base4</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+</head>
+
+<body>
+    <main>
+        <h1>jQuery drills base 4 - Exercice 3</h1>
+        <h2>Créer un formulaire qui demande le nom, le prénom, l'adresse mail et le numéro de téléphone de l'utilisateur.</h2>
+        <p>
+            <pre>
+            Verifier que l'adresse mail est bien une adresse mail, vérifier que le numéro de téléphone ne comporte que des chiffres, et que le nom et le prénom ne contiennent que des lettres ou des tirets.
+        </pre>
+        </p>
+        <div id="container">
+            <form action="">
+                <label for="nom">Nom :</label>
+                <input type="text" name="nom" id="nom" placeholder="Entrez votre nom" required>
+                <label for="prenom">Prénom :</label>
+                <input type="text" name="prenom" id="prenom" placeholder="Entrez votre prenom" required>
+                <label for="email">Email :</label>
+                <input type="text" name="email" id="email" placeholder="Entrez votre email" required>
+                <label for="numero">Téléphone :</label>
+                <input type="text" name="tel" id="tel" placeholder="Entrez un numéro" required>
+            </form>
+            <button id="envoyerButton">Envoyer</button>
+            <p id="result">
+
+            </p>
+        </div>
+    </main>
+</body>
+<script src="jquery-2.2.4.js"></script>
+<script>
+    $("#envoyerButton").click(function () {
+        let nom, prenom, email, tel, resultDisplayEl, inputs;
+        resultDisplayEl = $("#result");
+        nom = $("#nom").val();
+        prenom = $("#prenom").val();
+        email = $("#email").val();
+        tel = $("#tel").val();
+        let nameRegex = /^[a-zâäàéèùêëîïôöçñA-Z\-\s]+$/i;
+        //Le regex du mail a été Gertrudé... via http://www.phpcodify.com/jquery-email-validation-using-regex-expression/
+        let emailRegex = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
+        let telRegex = /^[0-9]+$/;
+        if (nameRegex.test(nom)) {
+            resultDisplayEl.html("Nom valide<br>");
+            console.log(nom);
+        } else {
+            resultDisplayEl.html("Le nom n'est pas valide (uniquement des lettres et des tirets)<br>");
+        }
+        if (nameRegex.test(prenom)) {
+            resultDisplayEl.append("Prénom valide<br>");
+            console.log(prenom);
+        } else {
+            resultDisplayEl.append("Le prénom n'est pas valide (uniquement des lettres et des tirets)<br>");
+        }
+        if (emailRegex.test(email)) {
+            resultDisplayEl.append("Email valide<br>");
+            console.log(email);
+        } else {
+            resultDisplayEl.append("L'email n'est pas un email valide.<br>");
+        }
+        if (telRegex.test(tel)) {
+            resultDisplayEl.append("Numéro de téléphone valide");
+            console.log(tel);
+        } else {
+            resultDisplayEl.append("Le numéro de téléphone n'est pas valide. (Uniquement des chiffres s.v.p.");
+        }
+        console.log(prenom);
+    });
+</script>
+</body>
+
+</html>

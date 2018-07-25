@@ -1,0 +1,98 @@
+<!DOCTYPEhtml>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jquery-exercice-base4</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <h1>jQuery drills base 4 - Exercice 2</h1>
+    <h2>Demander à l'aide d'un formulaire le salaire d'une personne, son genre et son nombre d'enfants</h2>
+    <p>
+        <pre>
+            Calculer le salaire en décomptant les frais suivants:
+
+            Charges : 18 %;
+            Assurance : 7%;
+            Cotisations : 5%;
+        
+        Il est possible de recevoir des réductions sur les frais totaux sous certaines conditions :
+        
+            Si l'employé est une femme, elle reçoit 2% de réduction.
+            Si l'employé a 3 enfants à charge, il reçoit 1% de réduction.
+            Si l'employé a 4 enfants à charge, il reçoit 2% de réduction.
+        </pre>
+    </p>
+    <div id="container">
+        <form action="">
+            <label for="salaire">Salaire :</label>
+            <input type="text" name="salaire" id="salaire" placeholder="Entrez un montant" required>
+
+            <label for="male">Homme :</label>
+            <input name="gender" id="male" type="radio" value="h" required>
+
+            <label for="female">Femme :</label>
+            <input name="gender" id="female" type="radio" value="f" required>
+            <label for="enfants">Nombre d'enfants :</label>
+            <input type="number" id="nombreEnfants" name="nombreEnfants" value="0">
+
+        </form>
+        <button id="calculButton">Calculer</button>
+        <p id="result">
+
+        </p>
+    </div>
+</body>
+<script src="jquery-2.2.4.js"></script>
+<script>
+    $("#calculButton").click(function () {
+        let resultPar = $("#result");
+        let salaireInputValue = $("#salaire").val();
+        let gender = $("input[type=radio][name=gender]:checked").val();
+        let enfants = $("#nombreEnfants").val();
+
+        let chargesPourc = 18;
+        let assurancePourc = 7;
+        let cotisationsPourc = 5;
+        let fraisTotauxPourc = (chargesPourc + assurancePourc + cotisationsPourc);
+        let reductionPourc = 0;
+        let fraisApresReducPourc, aDeduireInt, salaire;
+
+
+        console.log(salaireInputValue);
+        console.log(gender);
+        console.log(enfants);
+        if (gender === 'f') {
+            reductionPourc = reductionPourc + 2;
+            console.log("Femme achievement unlocked ! Reduction (%):" + reductionPourc);
+        }
+        if (enfants !== 0) {
+            console.log("Au moins un enfant, cool");
+            if (enfants == 3) {
+                reductionPourc = reductionPourc + 1;
+                console.log(reductionPourc);
+                console.log("3 enfants achievement unlocked ! Reduction (%): " + reductionPourc);
+            } else if (enfants >= 4) {
+                reductionPourc = reductionPourc + 2;
+                console.log("4 enfants achievement unlocked ! Reduction (%): " + reductionPourc);
+            }
+        }
+        fraisApresReducPourc = (fraisTotauxPourc - reductionPourc);
+        console.log("% Frais totaux : " + fraisTotauxPourc);
+        console.log("% Frais totaux après réductions : " + fraisApresReducPourc);
+        aDeduireInt = (salaireInputValue / 100 * (fraisTotauxPourc - reductionPourc));
+        salaire = (salaireInputValue - aDeduireInt);
+        console.log("Après déduction des charges, réductions comprises, vous allez toucher : " + salaire + " €");
+        resultPar.html("Après déduction des charges, réductions comprises, vous allez toucher : <strong>" +
+            salaire + "</strong> €");
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jquery-exercice-base3</title>
+    <style>
+    .rectangle {
+        height: 70px;
+        width: 140px;
+        background-color: orange;
+    }
+    </style>
+</head>
+
+<body>
+    <h2>Base 3 - Exercice 4</h2>
+    <div class="rectangle"></div>
+
+    <!-- Bouton 1 : augmente la hauteur de 10px, si il dépasse 100px, il remet la hauteur à 10px
+    Bouton 2 : met le rectangle en vert
+    Bouton 3 : remet les couleurs initiales
+    Bouton 4 : fait disparaître le rectangle
+    Bouton 5 : fait réaparaître le rectangle -->
+
+
+    <button id="bouton1">Augmente la hauteur</button>
+    <button id="bouton2">Vert</button>
+    <button id="bouton3">Couleur initiale</button>
+    <button id="bouton4">Hide</button>
+    <button id="bouton5">Show</button>
+</body>
+<script src="jquery-2.2.4.js"></script>
+<script>
+let rectangle = $( ".rectangle" );
+let initialRectangleColor = rectangle.css("background-color");
+$("#bouton1").click( function() {
+    thisHeight = rectangle.height();
+    if (thisHeight < 100) {
+        thisHeight = thisHeight+10;
+        rectangle.css("height", thisHeight)
+    }else if (thisHeight >= 100) {
+        thisHeight = 10;
+        rectangle.css("height", 10);
+    }
+    // console.log(thisHeight);
+});
+$("#bouton2").click( function() {
+    rectangle.css("background-color", "green");
+});
+$("#bouton3").click( function() {
+    rectangle.css("background-color", initialRectangleColor);
+});
+$("#bouton4").click( function() {
+    rectangle.hide();
+});
+$("#bouton5").click( function() {
+    rectangle.show();
+});
+</script>
+</body>
+
+</html>
